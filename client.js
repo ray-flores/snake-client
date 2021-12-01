@@ -10,6 +10,19 @@ const connect = function (data) {
     console.log('Successfully connected to the game server');
     conn.write('Name: RMF');
   });
+
+
+  // Make snake move on connection, with time delay
+  // conn.on('connect', () => {  
+  //   conn.write('Move: up');
+  //   let start = 0;
+  //   let arr = ['Move: up', 'Move: right', 'Move: right', 'Move: down', 'Move: down','Move: down'];
+  //   for (let i = 0; i < arr.length; i++) {
+  //     setTimeout(() => {
+  //       conn.write(arr[i]);
+  //     }, (start += 1000))
+  //   }
+  // });
   
   //receives message from server upon being kicked off for idling
   conn.on('data', (data) => {
