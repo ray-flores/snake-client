@@ -17,8 +17,12 @@ const setupInput = function (conn) { //while conn can be put in here, we must ad
 //we removed handleUserInput from setupInput and placed our run command of connect() (in play.js) as an argument w/in run command of setUpInput() in play.js
 const handleUserInput = (key) => {  //must use anon/arrow function format
 
-  if ('data') {
+  if (key === 'h') {
     connection.write('Say: Hello World');
+  }
+
+  if (key === 'i') {
+    connection.write('Say: Yum');
   }
 
   if (key === 'w') {
@@ -38,7 +42,7 @@ const handleUserInput = (key) => {  //must use anon/arrow function format
   }
 
   if (key === '\u0003') {
-    console.log('Exit');
+    console.log('Exited game');
     process.exit();
   }
 
