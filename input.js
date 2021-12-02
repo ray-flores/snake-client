@@ -2,7 +2,7 @@
 
 let connection;
 
-const setupInput = function (conn) {
+const setupInput = function (conn) { //while conn can be put in here, we must adjust play.js to include connect in the run command of our setUpInput call; see below
   connection = conn;
   const stdin = process.stdin;
   stdin.on('data', handleUserInput);
@@ -16,6 +16,10 @@ const setupInput = function (conn) {
 
 //we removed handleUserInput from setupInput and placed our run command of connect() (in play.js) as an argument w/in run command of setUpInput() in play.js
 const handleUserInput = (key) => {  //must use anon/arrow function format
+
+  if ('data') {
+    connection.write('Say: Hello World');
+  }
 
   if (key === 'w') {
     connection.write('Move: up');
