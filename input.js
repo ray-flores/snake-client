@@ -1,35 +1,45 @@
 
 
+let connection;
 
-
-const setupInput = function () {
+const setupInput = function (conn) {
+  connection = conn;
   const stdin = process.stdin;
+  stdin.on('data', handleUserInput);
   stdin.setRawMode(true);
   stdin.setEncoding("utf8");
   stdin.resume();
-  
-  const handleUserInput = (key) => {  //must use anon/arrow function format
-    // if (key === 'j') {
-    //   process.stdout.write('Move: up');
-    // }
-    // if (key === 'l') {
-    //   process.stdout.write('Move: right');
-    // }
-    // if (key === 'h') {
-    //   process.stdout.write('Move: left');
-    // }
-    // if (key === 'k') {
-    //   process.stdout.write('Move: down');
-    // }
-    if (key === '\u0003') {
-      process.stdout.exit();
-    }
-  }
-
-   //event listener for keyboard input
-  stdin.on('data', handleUserInput);
-  
   return stdin;
+   //event listener for keyboard input
+  // stdin.on('data', handleUserInput);
 };
 
-module.exports = setupInput;
+//we removed handleUserInput from setupInput and placed our run command of connect() (in play.js) as an argument w/in run command of setUpInput() in play.js
+const handleUserInput = (key) => {  //must use anon/arrow function format
+
+  if (key === 'w') {
+    connection.write('Move: up');
+  }
+
+  if (key === 'a') {
+    connection.write('Move: left');
+  }
+
+  if (key === 's') {
+    connection.write('Move: down');
+  }
+
+  if (key === 'd') {  
+    connection.write('Move: right');
+  }
+
+  if (key === '\u0003') {
+    console.log('Exit');
+    process.exit();
+  }
+
+}
+
+module.exports = {
+  setupInput
+};

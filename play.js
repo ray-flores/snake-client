@@ -9,8 +9,8 @@ const { setupInput } = require('./input');
 // establishes a connection with the game server
 
 console.log("Connecting ...");
-connect();
 
-setupInput(); // keep below function re: hoisting
+
+setupInput(connect()); // keep below function re: hoisting
 
 //console.log(connect); to show object in terminal
